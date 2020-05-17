@@ -25,7 +25,9 @@ class App extends Component {
   }
 
   updateCity(city) {
-    this.setState({ city: city.substring(0, city.indexOf(',')) }, () => this.refs.weather.ChangeCity(city))
+    if (city !== "") {
+      this.setState({ city: city.substring(0, city.indexOf(',')) }, () => this.refs.weather.ChangeCity(city))
+    }
   }
 
   render() {

@@ -237,7 +237,7 @@ class WeatherComp extends Component {
 
                         {/* current weather data */}
                         <View style={styles.header}>
-                            <Text style={styles.currentTemp}>{this.state.current_weather_data[0].temp + "°"}</Text>
+                            <Text style={styles.currentTemp}>{Math.round(parseFloat(this.state.current_weather_data[0].temp)) + "°"}</Text>
                             {this.GetWeatherIcon(0)}
                             <Text style={styles.description}>{this.state.current_weather_data[0]['weather'].description}</Text>
                             <View style={styles.weatherRow}>
@@ -251,61 +251,55 @@ class WeatherComp extends Component {
 
                         {/* forecast data */}
                         <View style={styles.body}>
-                            {/* second day */}
-                            <View style={styles.weatherRow}>
-                                <Text style={styles.dayName}>{this.GetDayName(1)}</Text>
-                                {this.GetWeatherIcon(1)}
-                                <View style={styles.tempRow}>
-                                    <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[1].high_temp))}</Text>
-                                    <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[1].low_temp))}</Text>
+                            <View style={styles.forecastRow}>
+                                {/* day names */}
+                                <View style={styles.forecastCol}>
+                                    <Text style={styles.dayName}>{this.GetDayName(1)}</Text>
+                                    <Text style={styles.dayName}>{this.GetDayName(2)}</Text>
+                                    <Text style={styles.dayName}>{this.GetDayName(3)}</Text>
+                                    <Text style={styles.dayName}>{this.GetDayName(4)}</Text>
+                                    <Text style={styles.dayName}>{this.GetDayName(5)}</Text>
+                                    <Text style={styles.dayName}>{this.GetDayName(6)}</Text>
                                 </View>
-                            </View>
-                            {/* third day */}
-                            <View style={styles.weatherRow}>
-                                <Text style={styles.dayName}>{this.GetDayName(2)}</Text>
-                                {this.GetWeatherIcon(2)}
-                                <View style={styles.tempRow}>
-                                    <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[2].high_temp))}</Text>
-                                    <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[2].low_temp))}</Text>
+                                {/* weather icons */}
+                                <View style={styles.forecastCol}>
+                                    {this.GetWeatherIcon(1)}
+                                    {this.GetWeatherIcon(2)}
+                                    {this.GetWeatherIcon(3)}
+                                    {this.GetWeatherIcon(4)}
+                                    {this.GetWeatherIcon(5)}
+                                    {this.GetWeatherIcon(6)}
                                 </View>
-                            </View>
-                            {/* fourth day */}
-                            <View style={styles.weatherRow}>
-                                <Text style={styles.dayName}>{this.GetDayName(3)}</Text>
-                                {this.GetWeatherIcon(3)}
-                                <View style={styles.tempRow}>
-                                    <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[3].high_temp))}</Text>
-                                    <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[3].low_temp))}</Text>
-                                </View>
-                            </View>
-                            {/* fifth day */}
-                            <View style={styles.weatherRow}>
-                                <Text style={styles.dayName}>{this.GetDayName(4)}</Text>
-                                {this.GetWeatherIcon(4)}
-                                <View style={styles.tempRow}>
-                                    <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[4].high_temp))}</Text>
-                                    <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[4].low_temp))}</Text>
-                                </View>
-                            </View>
-                            {/* sixth day */}
-                            <View style={styles.weatherRow}>
-                                <Text style={styles.dayName}>{this.GetDayName(5)}</Text>
-                                {this.GetWeatherIcon(5)}
-                                <View style={styles.tempRow}>
-                                    <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[5].high_temp))}</Text>
-                                    <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[5].low_temp))}</Text>
-                                </View>
-                            </View>
-                            {/* seventh day */}
-                            <View style={styles.weatherRow}>
-                                <Text style={styles.dayName}>{this.GetDayName(6)}</Text>
-                                {this.GetWeatherIcon(6)}
-                                <View style={styles.tempRow}>
-                                    <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[6].high_temp))}</Text>
-                                    <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[6].low_temp))}</Text>
+                                {/* high and low temps */}
+                                <View style={styles.forecastCol}>
+                                    <View style={styles.tempRow}>
+                                        <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[1].high_temp))}</Text>
+                                        <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[1].low_temp))}</Text>
+                                    </View>
+                                    <View style={styles.tempRow}>
+                                        <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[2].high_temp))}</Text>
+                                        <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[2].low_temp))}</Text>
+                                    </View>
+                                    <View style={styles.tempRow}>
+                                        <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[3].high_temp))}</Text>
+                                        <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[3].low_temp))}</Text>
+                                    </View>
+                                    <View style={styles.tempRow}>
+                                        <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[4].high_temp))}</Text>
+                                        <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[4].low_temp))}</Text>
+                                    </View>
+                                    <View style={styles.tempRow}>
+                                        <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[5].high_temp))}</Text>
+                                        <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[5].low_temp))}</Text>
+                                    </View>
+                                    <View style={styles.tempRow}>
+                                        <Text style={styles.highTemp}>{Math.round(parseFloat(this.state.forecast_data[6].high_temp))}</Text>
+                                        <Text style={styles.lowTemp}>{Math.round(parseFloat(this.state.forecast_data[6].low_temp))}</Text>
+                                    </View>
                                 </View>
                             </View>
                         </View>
+
 
                         {/* sunrise/sunset */}
                         <View style={styles.infoRow}>
@@ -397,6 +391,7 @@ const styles = StyleSheet.create({
 
     tempRow: {
         flexDirection: 'row',
+        marginLeft: 46,
     },
 
     dayName: {
@@ -466,6 +461,22 @@ const styles = StyleSheet.create({
         color: 'rgba(255, 255, 255, 0.5)',
         fontWeight: '400',
         fontSize: 20,
+    },
+
+    // new forecast style
+    forecastRow: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginLeft: 15,
+        marginRight: 15,
+        paddingTop: 10,
+    },
+
+    forecastCol: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
     },
 });
 
