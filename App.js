@@ -5,7 +5,6 @@ import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
-  View,
   Text,
   StatusBar,
   TextInput,
@@ -27,14 +26,14 @@ class App extends Component {
 
     this.updateCity = this.updateCity.bind(this);
     this.PredictCity = this.PredictCity.bind(this);
+    this.GenerateSearchPredictions = this.GenerateSearchPredictions.bind(this);
 
   }
 
   updateCity(city) {
     if (city !== "") {
-      city = city.slice(0, city.indexOf('USA')-2).replace(' ', '');
-      this.setState({ city: city.substring(0, city.indexOf(',')) }, () => this.refs.weather.ChangeCity(city))
-    }    
+      this.setState({ city: city.substring(0, city.indexOf(',')), predict_data: [] }, () => this.refs.weather.ChangeCity(city))
+    }
   }
 
   PredictCity(search) {
@@ -48,6 +47,26 @@ class App extends Component {
                     this.setState({error});
                 }
             )
+  }
+
+  GenerateSearchPredictions() {
+    return (
+      <FlatList
+        data={this.state.predict_data}
+        renderItem={({item, index, separators}) => (
+          <TouchableHighlight
+            style={styles.searchList}
+            onPress={() => this.updateCity(item.description)}
+            onShowUnderlay={separators.highlight}
+            onHideUnderlay={separators.unhighlight}
+          >
+            <Text style={styles.searchItem}>
+              {item.description}
+            </Text>
+          </TouchableHighlight>
+        )}
+      />
+    );
   }
 
   render() {
@@ -73,25 +92,11 @@ class App extends Component {
                 placeholderTextColor="grey"
                 onChangeText={(search) => this.PredictCity(search)}
               />
-              <FlatList
-              data={this.state.predict_data}
-              renderItem={({item, index, separators}) => (
-                <TouchableHighlight
-                  style={styles.searchList}
-                  onPress={() => this.updateCity(item.description)}
-                  onShowUnderlay={separators.highlight}
-                  onHideUnderlay={separators.unhighlight}
-                >
-                  <Text style={styles.searchItem}>
-                    {item.description}
-                  </Text>
-                </TouchableHighlight>
-              )}
-              />
+              {this.GenerateSearchPredictions()}
             </>
           )}
           <Text style={styles.cityName}>{this.state.city}</Text>
-          <ScrollView style={styles.scrollView}>
+          <ScrollView>
             <Weather ref="weather"></Weather>
           </ScrollView>
         </SafeAreaView>
@@ -143,10 +148,6 @@ const styles = StyleSheet.create({
     backgroundColor: "whitesmoke",
     borderColor: 'gray',
     borderWidth: 1,
-  },
-
-  scrollView: {
-    // backgroundColor: '#6699cc',
   },
 
   cityName: {
